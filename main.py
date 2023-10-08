@@ -9,3 +9,7 @@ def get_data(searchterm):
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html.parser')
     return soup
+
+def parse(soup):
+    productslist = []
+    results = soup.find_all('div', {'class': 's-item__info clearfix'})
