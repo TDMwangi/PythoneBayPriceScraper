@@ -13,3 +13,9 @@ def get_data(searchterm):
 def parse(soup):
     productslist = []
     results = soup.find_all('div', {'class': 's-item__info clearfix'})
+    for item in results:
+        product = {
+            'title': item.find('div', {'class': 's-item__title'}).text,
+            'soldprice': float(item.find('span', {'class': 's-item__price'}).text.replace('£','').replace('$','').replace(',','').strip()),
+            'solddate': item.find('div', {'class': 's-item__title--tag'}).find('span', {'class':'POSITIVE'}).text if item.find('div', {'class': 's-item__title--tag'}) is not None else None,
+        }
