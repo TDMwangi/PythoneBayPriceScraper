@@ -18,4 +18,8 @@ def parse(soup):
             'title': item.find('div', {'class': 's-item__title'}).text,
             'soldprice': float(item.find('span', {'class': 's-item__price'}).text.replace('£','').replace('$','').replace(',','').strip()),
             'solddate': item.find('div', {'class': 's-item__title--tag'}).find('span', {'class':'POSITIVE'}).text if item.find('div', {'class': 's-item__title--tag'}) is not None else None,
+            'bids': item.find('span', {'class': 's-item__bids s-item__bidCount'}).text if item.find('span', {'class': 's-item__bids s-item__bidCount'}) is not None else None,
+            'link': item.find('a', {'class': 's-item__link'})['href']
         }
+        productslist.append(product)
+    return productslist
