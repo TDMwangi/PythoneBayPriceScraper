@@ -23,3 +23,13 @@ def parse(soup):
         }
         productslist.append(product)
     return productslist
+
+def output(productslist, searchterm):
+    productsdf =  pd.DataFrame(productslist)
+    productsdf.to_csv(searchterm + 'output.csv', index=False)
+    print('Saved to CSV')
+    return
+
+soup = get_data(searchterm)
+productslist = parse(soup)
+output(productslist, searchterm)
